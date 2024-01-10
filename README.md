@@ -1,4 +1,4 @@
-# Project Readme
+
 
 ## Project Overview
 
@@ -53,9 +53,6 @@ Once a user's offer is chosen, negotiations can take place, and the user can acc
 
 Detailed specification and collaboration occur with the customer to refine project requirements and meet specific needs.
 
-## APIs
-
-The platform provides APIs to facilitate integration with other groups or systems.
 
 ### Getting Started
 

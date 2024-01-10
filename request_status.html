@@ -1,0 +1,169 @@
+<!-- request_status.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Request Status</title>
+    <style>
+        /* Basic CSS for layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            width: 100%;
+            background-color: #007bff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+            header a {
+                color: #fff;
+                text-decoration: none;
+                margin-right: 20px;
+                font-size: 16px;
+            }
+
+        main {
+            width: 80%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .requests-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+
+        .request-item {
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+
+        .edit-button {
+            margin-top: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .edit-button:hover {
+                background-color: #0056b3;
+            }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+            .delete-button:hover {
+                background-color: #c82333;
+            }
+
+        /* Style for the Create Request button */
+        .create-request-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px; /* Adjust margin as needed */
+        }
+
+            .create-request-button:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="home_page.html" class="action-button home-button">Home</a>
+    </header>
+    <main>
+        <h1>Request Status</h1>
+        <button class="create-request-button" onclick="createRequest()">Create Request</button>
+        <div id="requestsContainer" class="requests-container"></div>
+    </main>
+
+    <script>
+        function createRequest() {
+            window.location.href = 'Service_Request_Page.html';
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const requestsContainer = document.getElementById('requestsContainer');
+            let requests = JSON.parse(sessionStorage.getItem('serviceRequests')) || [];
+
+            // Function to display requests
+            function displayRequests() {
+                requestsContainer.innerHTML = '';
+                requests.forEach((request, index) => {
+                    const requestDiv = document.createElement('div');
+                    requestDiv.classList.add('request-item');
+
+                    // Display request details
+                    requestDiv.innerHTML = `
+                                    <p>Project Information: ${request.projectInformation}</p>
+                                    <p>Start Date: ${request.startDate}</p>
+                                    <p>End Date: ${request.endDate}</p>
+                                    <p>Work Location: ${request.workLocation}</p>
+                                    <p>Position Domain: ${request.positionDomain}</p>
+                                    <p>Position Role: ${request.positionRole}</p>
+                                    <p>Experience Level: ${request.experienceLevel}</p>
+                                    <p>Technology: ${request.technology}</p>
+
+                                    <button class="edit-button" onclick="editRequest(${index})">Edit</button>
+                                    <button class="delete-button" onclick="deleteRequest(${index})">Delete</button>
+                                `;
+                    requestsContainer.appendChild(requestDiv);
+                });
+            }
+            // Function to redirect to the Service Request Page for creating a new request
+
+            // Function to delete request
+            window.deleteRequest = function (index) {
+                requests.splice(index, 1);
+                sessionStorage.setItem('serviceRequests', JSON.stringify(requests));
+                displayRequests();
+            };
+
+            // Function to edit request
+            window.editRequest = function (index) {
+                sessionStorage.setItem('editIndex', index); // Store the editIndex instead of editRequest
+                window.location.href = 'Service_Request_Page.html';
+            };
+
+            function createRequest() {
+                window.location.href = 'Service_Request_Page.html';
+            }
+
+            // Display all requests initially
+            displayRequests();
+        });
+    </script>
+</body>
+</body>
+</html>

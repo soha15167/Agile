@@ -54,26 +54,6 @@ Once a user's offer is chosen, negotiations can take place, and the user can acc
 Detailed specification and collaboration occur with the customer to refine project requirements and meet specific needs.
 
 
-### Getting Started
-
-1. Clone the repository.
-   ```
-   git clone https://github.com/your-username/project.git
-   ```
-
-2. Install dependencies.
-   ```
-   cd project
-   npm install
-   ```
-
-3. Configure authentication settings, provider credentials, and other parameters.
-
-4. Run the application.
-   ```
-   npm start
-   ```
-
 ### Contribution Guidelines
 
 1. Fork the repository.
